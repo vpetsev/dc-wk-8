@@ -7,11 +7,11 @@
 </head>
 <body>
     <h1>Post Details</h1>
-    
+    {{dataValues.title}}
     <form method="POST" action="/update-post">
     <ul>
         Title
-        <li><input type="text" value={{title}} name="postTitle"></li>
+        <li><input type="text" value="{{title}}" name="postTitle"/></li>
         Category
         <li>            
             <select name="postCategory">
@@ -23,10 +23,10 @@
             </select>
         </li>
         Body
-        <li><input type="text" value={{body}} name="postBody"></li>
-        <input type="hidden" value={{id}} name="postId">
+        <li><input type="text" value="{{body}}" name="postBody"/></li>
+        <input type="hidden" value={{id}} name="postId"/>
     </ul>
-        <button>Update</button>
+    <button>Update</button>
     </form>
 </body>
 </html>

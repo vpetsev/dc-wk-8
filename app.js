@@ -73,8 +73,14 @@ app.get("/post-details/:postId", (req, res) =>{
     let postId = req.params.postId
     models.Post.findByPk(postId)
     .then(updatedPost => {
-        console.log(updatedPost)
-        res.render("post-details", updatedPost)
+        console.log("=====", updatedPost.dataValues)
+        // res.render("post-details", {
+        //     title: updatedPost.title,
+        //     category: updatedPost.category,
+        //     body: updatedPost.body,
+        //     postId: updatedPost.id
+        // })
+        res.render("post-details", updatedPost.dataValues)
     })
 })
 
