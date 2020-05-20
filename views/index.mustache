@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Blog Posts</title>
+</head>
+<body>
+    <h3>Add a new blog post</h3>
+    <button><a href="/add-post">Add A Post</a></button>
+    <h2> Filter by Category</h2>
+        <form method="post" action="/filter-posts">
+            <select name="postCategory">
+                <option value="JS">JS</option>
+                <option value="PY">PY</option>
+                <option value="TS">TS</option>
+                <option value="C#">C#</option>
+                <option value="C++">C++</option>
+            </select>
+            <button>Filter</button>
+        </form>
+    <ul>
+    {{#posts}}
+        <li>
+        <form method="POST" action="/delete-post">
+            <h4>{{title}} - {{category}}</h4>
+            <p>{{body}}</p>
+            <input type="hidden" value={{id}} name="postId"/>
+            <li>
+            <button>Remove</button>
+            </li>
+        </form>
+                    <li>
+            <input type="checkbox" name="isPublished"/> IS published?
+            </li>
+            <li>
+                <button><a href="/post-details/{{id}}">Update Post</a></button>
+            </li>
+        </li>
+    {{/posts}}
+    </ul>
+</body>
+</html>

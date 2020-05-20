@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+</head>
+<body>
+    <h1>Post Details</h1>
+    
+    <form method="POST" action="/update-post">
+    <ul>
+        Title
+        <li><input type="text" value={{title}} name="postTitle"></li>
+        Category
+        <li>            
+            <select name="postCategory">
+                <option value="JS">JS</option>
+                <option value="PY">PY</option>
+                <option value="TS">TS</option>
+                <option value="C#">C#</option>
+                <option value="C++">C++</option>
+            </select>
+        </li>
+        Body
+        <li><input type="text" value={{body}} name="postBody"></li>
+        <input type="hidden" value={{id}} name="postId">
+    </ul>
+        <button>Update</button>
+    </form>
+</body>
+</html>

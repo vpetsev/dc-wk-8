@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Blog Post</title>
+</head>
+<body>
+    <form method="POST" action="/add-post">
+        <input type="text" placeholder="Enter post title" name="postTitle"/>
+        <input type="text" placeholder="Enter body text" name="postBody"/>
+        <select name="postCategory">
+            <option value="JS">JS</option>
+            <option value="PY">PY</option>
+            <option value="TS">TS</option>
+            <option value="C#">C#</option>
+            <option value="C++">C++</option>
+        </select>
+        <button>Save</button>
+    </form>
+</body>
+</html>
