@@ -6,15 +6,16 @@
     <title>All Blog Posts</title>
 </head>
 <body>
-    <h3>Add a new blog post</h3>
-    <button><a href="/add-post">Add A Post</a></button>
+    <h1>All Blog Posts</h1>
+    <button><a href="/add-post">Add a new Blog Post</a></button>
     <h2> Filter by Category</h2>
         <form method="post" action="/filter-posts">
             <select name="postCategory">
                 <option value="JS">JS</option>
                 <option value="PY">PY</option>
                 <option value="TS">TS</option>
-                <option value="C#">C#</option>
+                <option value="Android">Android</option>
+                <option value="IOs">IOs</option>
                 <option value="C++">C++</option>
             </select>
             <button>Filter</button>
@@ -22,21 +23,22 @@
     <ul>
     {{#posts}}
         <li>
-        <form method="POST" action="/delete-post">
-            <h4>{{title}} - {{category}}</h4>
-            <p>{{body}}</p>
-            <input type="hidden" value={{id}} name="postId"/>
+            <form method="POST" action="/delete-post">
+                <h4>
+                    Title: {{title}} - Category: {{category}}   <button>Remove</button> 
+                </h4>
+                <p>Body: {{body}}</p>
+                <input type="hidden" value={{id}} name="postId"/>
+            </form>
             <li>
-            <button>Remove</button>
-            </li>
-        </form>
-                    <li>
-            <input type="checkbox" name="isPublished"/> IS published?
+                 <input type="checkbox" name="isPublished"/> IS published?
             </li>
             <li>
                 <button><a href="/post-details/{{id}}">Update Post</a></button>
             </li>
+            <button><a href="/add-post">Add a new Blog Post</a></button>
         </li>
+        <button><a href="/post-details/{{id}}">Add a new comment</a></button>
     {{/posts}}
     </ul>
 </body>

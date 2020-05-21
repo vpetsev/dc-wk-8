@@ -1,0 +1,27 @@
+
+<html>
+<head></head>
+
+
+<body>
+   <h1>{{name}}</h1>
+    <h3>Add a Comment</h3>
+    <form method="POST" action="/add-comment">
+     <div style="display:flex; flex-direction: column; width:50%">
+        <input type="hidden" name="postId" value={{id}} />
+        <input type="text" placeHolder="Enter title" name="title" />
+        <textarea name="description"></textarea>
+        <button>Submit</button>
+         </div>
+    </form>
+
+    <h3>Comments</h3>
+    <ul>
+    {{#comments}}
+         <li>
+            {{title}}
+            <p>{{body}}</p>
+        </li>
+   {{/comments}}
+   </body>
+</html>

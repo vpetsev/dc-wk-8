@@ -6,17 +6,19 @@
     <title>Add a Blog Post</title>
 </head>
 <body>
+<h1>Add a blog post</h1>
     <form method="POST" action="/add-post">
         <input type="text" placeholder="Enter post title" name="postTitle"/>
-        <input type="text" placeholder="Enter body text" name="postBody"/>
+        <textarea placeholder="Enter post Body" name="postBody"></textarea>
         <select name="postCategory">
             <option value="JS">JS</option>
             <option value="PY">PY</option>
             <option value="TS">TS</option>
-            <option value="C#">C#</option>
+            <option value="Android">Android</option>
+            <option value="IOs">IOs</option>
             <option value="C++">C++</option>
         </select>
-        <button>Save</button>
+        <button>Add Post</button>
     </form>
 </body>
 </html>

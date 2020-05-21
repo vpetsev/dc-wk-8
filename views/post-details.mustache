@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Post Details</h1>
+    <!--
     {{dataValues.title}}
     <form method="POST" action="/update-post">
     <ul>
@@ -18,7 +19,8 @@
                 <option value="JS">JS</option>
                 <option value="PY">PY</option>
                 <option value="TS">TS</option>
-                <option value="C#">C#</option>
+                <option value="Android">Android</option>
+                <option value="IOs">IOs</option>
                 <option value="C++">C++</option>
             </select>
         </li>
@@ -28,5 +30,28 @@
     </ul>
     <button>Update</button>
     </form>
+   </ul>
+   -->
+    <h1>{{title}}</h1>
+    
+    
+    <h3>Add a Comment</h3>
+    <form method="POST" action="/add-comment">
+     <div style="display:flex; flex-direction: column; width:50%">
+        <input type="hidden" name="commentId" value={{id}} />
+        <input type="text" placeHolder="Enter title" name="title" />
+        <textarea name="body"></textarea>
+        <button>Submit</button>
+         </div>
+    </form>
+
+    <h3>Comments</h3>
+    <ul>
+    {{#comments}}
+         <li>
+            {{title}}
+            <p>{{body}}</p>
+        </li>
+   {{/comments}}
 </body>
 </html>
