@@ -38,7 +38,7 @@
     <h3>Add a Comment</h3>
     <form method="POST" action="/add-comment">
      <div style="display:flex; flex-direction: column; width:50%">
-        <input type="hidden" name="commentId" value={{id}} />
+        <input type="hidden" name="postId" value="{{id}}" />
         <input type="text" placeHolder="Enter title" name="title" />
         <textarea name="body"></textarea>
         <button>Submit</button>
