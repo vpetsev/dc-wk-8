@@ -49,50 +49,35 @@ app.post("/delete-post", (req, res) => {
     })
 })
 
-app.get("/post-details/:postId", (req, res) => {
-    let postId = req.params.postId
-    models.Post.findByPk(postId, {
-        include: [
-            {
-                model: models.Comment,
-                as: 'comments'
-            }
-        ]
-    }).then(post => {
-            res.render("post-details", post.dataValues)
-    })
+app.get("/post-details/:postId", async (req, res, next) => {
+    try {
+        const post = await models.Post.findByPk(req.params.postId, {
+            include: [{ model: models.Comment, as: 'comments' }]
+        })
+        if (!post) return res.status(404).send("Post not found")
+        res.render("post-details", post.get({ plain: true }))
+    } catch (error) { next(error) }
 })
 
-app.get("/comments/:commentId", (req, res)=>{ 
-    let commentId = req.params.commentId
-
-    models.Comment.findByPk(commentId, {
-        include: [
-            {
-                model: models.Post,
-                as: "post"
-            }
-        ]
-    }).then(comment => {
-        console.log(comment)
-        res.redirect(`/posts/${postId}`)
-    })
+app.get("/comments/:commentId", async (req, res, next) => {
+    try {
+        const comment = await models.Comment.findByPk(req.params.commentId)
+        if (!comment) return res.status(404).send("Comment not found")
+        res.redirect(`/post-details/${comment.post_id}`)
+    } catch (error) { next(error) }
 })
 
-app.post("/add-comment", (req, res) => {
-    let title = req.body.title
-    let body = req.body.body
-    let postId = req.body.postId
-
-    let comment = models.Comment.build({
-        title: title,
-        body: body,
-        post_id: postId
-    })
-
-    review.save().then(savedReview => {
-        res.redirect(`/posts/${postId}`)
-    })
+app.post("/add-comment", async (req, res, next) => {
+    const postId = Number(req.body.postId)
+    if (!Number.isInteger(postId) || postId < 1) {
+        return res.status(400).send("A valid postId is required")
+    }
+    try {
+        const post = await models.Post.findByPk(postId)
+        if (!post) return res.status(404).send("Post not found")
+        await models.Comment.create({ title: req.body.title, body: req.body.body, post_id: postId })
+        res.redirect(`/post-details/${postId}`)
+    } catch (error) { next(error) }
 })
 
 // app.post("/update-post", (req, res) => {
@@ -124,6 +109,12 @@ app.post("/filter-posts", (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("server is being hosted on http://localhost:3000")
+app.use((error, req, res, next) => {
+    if (res.headersSent) return next(error)
+    res.status(500).send("Unable to complete the request")
 })
+
+if (require.main === module) {
+    app.listen(process.env.PORT || 3000, () => console.log("Blog server started"))
+}
+module.exports = app
